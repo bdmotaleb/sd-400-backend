@@ -1,0 +1,109 @@
+Users
+-
+id PK int
+name varchar(255)
+email varchar(255)
+email_verified_at timestamp
+password varchar(255)
+avatar varchar(255)
+status enum('active','disabled')
+remember_token varchar(100)
+created_at timestamp
+updated_at timestamp
+
+
+Members
+-
+id PK int
+member_id varchar(20)
+name varchar(100)
+gender enum('male','female')
+mobile varchar(11)
+blood_group enum('A+','A-'....)
+address text
+photo varchar(100)
+lock tinyint(1)
+card_no varchar(15)
+create_by bigint(20) FK >- Users.id
+status enum('active','expired','locked','limited')
+created_at timestamp
+updated_at timestamp
+
+Invoices
+-
+id PK int
+member_id varchar(20) FK >- Members.id
+start_date date
+end_date date
+amount decimal(8,2)
+fee_type enum('admission','monthly','package')
+payment_type enum('bKash','Cash','Card','Rocket')
+create_by bigint(20) FK >- Users.id
+created_at timestamp
+updated_at timestamp
+deleted_at timestamp
+
+Expenses
+-
+id PK int
+name varchar(200)
+amount decimal(8,2)
+date date
+type enum('regular','fixed','investment')
+create_by bigint(20) FK >- Users.id
+created_at timestamp
+updated_at timestamp
+deleted_at timestamp
+
+Sms_log
+-
+id PK int
+mobile varchar(11)
+sms text
+feedback varchar(10)
+created_by bigint(20) FK >- Users.id
+created_at timestamp
+updated_at timestamp
+
+Settings
+-
+id PK int
+name varchar(100)
+logo varchar(100)
+favicon varchar(100)
+email varchar(100)
+mobile varchar(11)
+fb_link varchar(255)
+youtube_link varchar(255)
+create_by bigint(20) FK >- Users.id
+created_at timestamp
+updated_at timestamp
+
+
+oauth_clients
+-
+id pk bigint(20)
+user_id bigint(20)
+name varchar(255)
+secret varchar(100)
+provider varchar(255)
+redirect text
+personal_access_client tinyint(1)
+password_client tinyint(1)
+revoked tinyint(1)
+created_at timestamp
+updated_at timestamp
+
+oauth_access_tokens
+-
+id PK varchar(100)
+user_id bigint(20)
+client_id bigint(20)
+name varchar(255)
+scopes text
+revoked tinyint(1)
+created_at timestamp
+updated_at timestamp
+expires_at timestamp
+
+
