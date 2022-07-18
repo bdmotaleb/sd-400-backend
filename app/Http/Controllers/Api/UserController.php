@@ -60,11 +60,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return JsonResponse
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            return success_response([], __('message.user.manage.deleted'), 203);
+        } else {
+            return error_response(__('message.user.manage.not_found'), 404);
+        }
     }
 }
